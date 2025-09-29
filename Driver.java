@@ -1,16 +1,37 @@
+import java.io.File;
+
 public class Driver {
     public static void main(String [] args) {
-        Polynomial p = new Polynomial();
-        System.out.println(p.evaluate(3));
-        double [] c1 = {6,0,0,5};
-        Polynomial p1 = new Polynomial(c1);
-        double [] c2 = {0,-2,0,0,-9};
-        Polynomial p2 = new Polynomial(c2);
-        Polynomial s = p1.add(p2);
-        System.out.println("s(0.1) = " + s.evaluate(0.1));
-        if(s.hasRoot(1))
-            System.out.println("1 is a root of s");
-        else
-            System.out.println("1 is not a root of s");
+        double[] coeffs1 = new double[]{1, 2, 5};
+        int[] exps1 = new int[]{0, 1, 4};
+        Polynomial p1 = new Polynomial(coeffs1, exps1);
+
+        double[] coeff2 = new double[]{-1, 1,1,-1};
+        int[] exps2 = new int[]{0,4,6, 7};
+        Polynomial p2 = new Polynomial(coeff2,exps2);
+
+
+        p2.printInfo();
+
+        System.out.println(p2.hasRoot(1));
+        System.out.println(p2.hasRoot(42));
+        System.out.println("p2(1) = " + p2.evaluate(1));
+        System.out.println("p1(1) = " + p1.evaluate(1));
+        System.out.println("p1(2) = " + p1.evaluate(2));
+
+
+        Polynomial p3 = p2.add(p1);
+
+        p3.printInfo();
+
+        p1.saveToFile("test.txt");
+
+        File f = new File("test.txt");
+        Polynomial p4 = new Polynomial(f);
+
+        p4.printInfo();
+
+
+
     }
 }
